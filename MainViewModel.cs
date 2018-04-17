@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EditModeSample
 {
@@ -16,6 +14,7 @@ namespace EditModeSample
         {
             get
             {
+                // try to spend some time here to make the generation of ComboBoxes even slower
                 return Items.Where(i => int.Parse(((int)(Math.Sqrt(i.Number * 1000))).ToString()) % 2 == 0);
             }
         }

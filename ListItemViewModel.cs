@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace EditModeSample
 {
@@ -13,14 +8,7 @@ namespace EditModeSample
 
         public int Number { get; set; }
         public string Property1 { get; set; }
-        private string property2;
-
-        public string Property2
-        {
-            get { return property2; }
-            set { property2 = value; }
-        }
-
+        public string Property2 { get; set; }
         public string Property3 { get; set; }
         public string Property4 { get; set; }
         public string Property5 { get; set; }
