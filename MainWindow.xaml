@@ -1,0 +1,87 @@
+﻿<Window x:Class="EditModeSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EditModeSample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="2"/>
+            </Style>
+
+            <Style TargetType="TextBox">
+                <Setter Property="Margin" Value="2"/>
+            </Style>
+
+            <DataTemplate x:Key="Template">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="{Binding Number}" Grid.Column="0"/>
+                    <TextBlock Text="{Binding Property1}" Grid.Column="1"/>
+                    <TextBlock Text="{Binding Property2}" Grid.Column="2"/>
+                    <TextBlock Text="{Binding Property3}" Grid.Column="3"/>
+                    <TextBlock Text="{Binding Property4}" Grid.Column="4"/>
+                    <TextBlock Text="{Binding Property5}" Grid.Column="5"/>
+                    <TextBlock Text="{Binding Property6}" Grid.Column="6"/>
+                    <TextBlock Text="{Binding Property7}" Grid.Column="7"/>
+                    <TextBlock Text="{Binding Property8}" Grid.Column="8"/>
+                    <TextBlock Text="{Binding Property9}" Grid.Column="9"/>
+
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="EditTemplate">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="{Binding Number}" Grid.Column="0"/>
+                    <ComboBox Name="p1" DisplayMemberPath="Number" SelectedValuePath="Number" SelectedValue="{Binding Property1}" Grid.Column="1" ItemsSource="{Binding DataContext.ComboBoxItems, ElementName=list}"/>
+                    <TextBox Name="p2" Text="{Binding Property2, Mode=TwoWay}" Grid.Column="2"/>
+                    <TextBox Name="p3" Text="{Binding Property3, Mode=TwoWay}" Grid.Column="3"/>
+                    <TextBox Name="p4" Text="{Binding Property4, Mode=TwoWay}" Grid.Column="4"/>
+                    <TextBox Name="p5" Text="{Binding Property5, Mode=TwoWay}" Grid.Column="5"/>
+                    <TextBox Name="p6" Text="{Binding Property6, Mode=TwoWay}" Grid.Column="6"/>
+                    <TextBox Name="p7" Text="{Binding Property7, Mode=TwoWay}" Grid.Column="7"/>
+                    <TextBox Name="p8" Text="{Binding Property8, Mode=TwoWay}" Grid.Column="8"/>
+                    <TextBox Name="p9" Text="{Binding Property9, Mode=TwoWay}" Grid.Column="9"/>
+                </Grid>
+            </DataTemplate>
+
+            <local:TemplateConverter x:Key="TemplateConverter" Template="{StaticResource Template}" EditTemplate="{StaticResource EditTemplate}"/>
+        </Grid.Resources>
+
+        <ListView SelectionMode="Single" ItemsSource="{Binding Items}" PreviewMouseDown="OnMouseDown" PreviewKeyDown="OnKeyDown" Name="list">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ContentPresenter ContentTemplate="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType=ListViewItem}, Converter={StaticResource TemplateConverter}}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
